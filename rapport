@@ -1,3 +1,38 @@
+Résumé des Étapes pour Déployer une API avec MLOps :
+
+1. Construction et Entraînement du Modèle
+-Enregistrement du modèle dans un fichier .h5 après l'entraînement.
+2. Développement de l'API Flask
+-Mise en place d'une API Flask pour permettre la prédiction en temps réel :
+-Chargement du modèle depuis le fichier .h5.
+-Création d'une route /predict qui reçoit des données en JSON et renvoie une prédiction.
+-Ajout de PrometheusMetrics pour surveiller les performances de l'API (monitoring).
+3. Conteneurisation avec Docker
+-Création d'un fichier Dockerfile pour containeriser l'API Flask :
+-Image de base Python.
+-Installation des dépendances via requirements.txt.
+-Exécution de l'API via Flask.
+-Construction de l'image Docker locale avec la commande : "docker build -t mlops-api" .
+-Test local du conteneur avec la commande : "docker run -p 5000:5000 mlops-api"
+-Utilisation de curl pour tester l'API localement 
+4. Orchestration avec Kubernetes
+-Création d'un fichier deployment.yaml pour définir :
+-Ledéploiement de l'API sur Kubernetes.
+-Un service LoadBalancer pour exposer l'API.
+-Application du fichier de déploiement sur Kubernetes : "kubectl apply -f deployment.yaml"
+-Vérification des ressources Kubernetes :{kubectl get deployments,kubectl get services,kubectl get pods}
+5. Monitoring et Logging
+-Ajout de monitoring avec Prometheus :
+-Configuration d’un endpoint Flask avec prometheus_flask_exporter.
+-Création de règles d’alerte dans un fichier alert_rules.yml.
+-Configuration de Prometheus pour scruter les métriques de l'API.
+-Mise en place de logging centralisé avec la stack ELK (Elasticsearch, Logstash, Kibana) via docker-compose.
+
+6. Tests et Validation
+-Test de l'API exposée via Kubernetes en utilisant l'IP.
+-Résolution des erreurs de connexion en corrigeant les configurations des pods et des services.
+
+
 Déploiement du Modèle via une API
 -Objectifs
 Mettre à disposition un modèle de prédiction via une API RESTful.
