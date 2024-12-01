@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction des Ventes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Simulateur de Prédiction des Ventes</h1>
+    <form action="/predict" method="POST">
+        <label for="sales_data">Entrez les données de vente sur 12 mois (séparées par des virgules) :</label>
+        <input type="text" id="sales_data" name="sales_data" required>
+        <button type="submit">Prédire</button>
+    </form>
+
+    {% if prediction %}
+    <h2>Prédiction des Ventes :</h2>
+    <ul>
+        {% for p in prediction %}
+        <li>{{ p }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Graphique des Ventes et Prédictions</h3>
+    <img src="data:image/png;base64,{{ graph_img }}" alt="Graphique des prédictions">
+    {% endif %}
+</body>
+</html>
