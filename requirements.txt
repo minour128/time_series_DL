@@ -1,0 +1,6 @@
+flask
+tensorflow
+prometheus_flask_exporter
+matplotlib
+joblib
+scikit-learn

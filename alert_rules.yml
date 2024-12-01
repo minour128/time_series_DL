@@ -1,0 +1,18 @@
+groups:
+  - name: example_alerts
+    rules:
+      # Règle pour alerter si la perte (loss) dépasse un certain seuil
+      - alert: HighLossDetected
+        expr: model_loss > 0.5
+        for: 5m  # L'alerte se déclenche après 5 minutes de dépassement
+        annotations:
+          summary: "La perte a dépassé le seuil de 0.1"
+          description: "La perte du modèle est trop élevée pendant plus de 5 minutes."
+
+      # Règle pour alerter si la précision (accuracy) tombe en dessous d'un certain seuil
+      - alert: LowAccuracyDetected
+        expr: model_accuracy < 0.95
+        for: 5m  # L'alerte se déclenche après 5 minutes de sous-performance
+        annotations:
+          summary: "La précision a chuté en dessous du seuil de 0.9"
+          description: "La précision du modèle est inférieure à 0.9 pendant plus de 5 minutes."

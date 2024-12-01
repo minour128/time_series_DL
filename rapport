@@ -1,0 +1,49 @@
+Déploiement du Modèle via une API
+-Objectifs
+Mettre à disposition un modèle de prédiction via une API RESTful.
+Offrir un service capable de recevoir des données de vente en temps réel et de retourner des prédictions.
+-Technologie Utilisée
+Framework : Flask.
+Modèle : Un modèle de prédiction entraîné en TensorFlow/Keras.
+Normalisation : Scalers pour adapter les données d'entrée à la plage utilisée lors de l'entraînement.
+Prometheus : Monitoring des métriques du modèle.
+-Architecture
+Endpoints Déployés :
+/predict : Reçoit des données de ventes en entrée et retourne une prédiction.
+-Fonctionnement
+Entrée : Les données de vente (12 mois) sont envoyées en POST via formulaire.
+Processus :
+Les données sont normalisées qui correspondent aux scalers utilisés pendant l'entraînement.
+Le modèle effectue une prédiction basée sur les données fournies.
+La prédiction est dénormalisée pour revenir à l'échelle d'origine.
+Les résultats sont intégrés à une interface utilisateur.
+Sortie : Une prédiction pour la prochaine période (le 13ᵉ mois).
+
+Développement d'une Application pour Simuler et Prédire les Ventes
+-Objectifs
+Fournir une interface utilisateur interactive pour tester le modèle.
+Permettre aux utilisateurs de visualiser les prédictions sous forme de graphiques.
+-Technologie Utilisée
+Framework : Flask (pour l'API et l'application frontend).
+Frontend :
+HTML + CSS pour l'interface utilisateur.
+Matplotlib pour la visualisation des prédictions sous forme de graphiques.
+-Création de l'Application
+a) Interface Utilisateur
+-Page d'accueil :
+Un formulaire pour saisir les données de vente sur 12 mois.
+Un bouton "Prédire" pour envoyer les données à l'API /predict.
+-Page de Résultats :
+Affichage de la prédiction pour le 13ᵉ mois.
+Un graphique comparant les données réelles saisies par l'utilisateur et les prédictions du modèle.
+b) Prédiction et Visualisation
+Une fois les données soumises, elles sont envoyées à l'API /predict.
+L'API retourne la prédiction ainsi qu'une image encodée en base64 représentant le graphique.
+Le frontend affiche les résultats et le graphique.
+
+Intégration de l’API
+a) Fonctionnement
+L'application frontend interagit avec l'API via HTTP.
+Méthode POST : Les données de vente sont envoyées sous forme de formulaire à l'endpoint /predict.
+Retour JSON : La prédiction et les graphiques sont récupérés.
+
